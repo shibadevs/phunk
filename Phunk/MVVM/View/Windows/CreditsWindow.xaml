@@ -1,0 +1,92 @@
+﻿<adonisControls:AdonisWindow x:Class="Phunk.MVVM.View.Windows.CreditsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Phunk.MVVM.View.Windows"
+        xmlns:vm="clr-namespace:Phunk.MVVM.ViewModel"
+        xmlns:adonisControls="clr-namespace:AdonisUI.Controls;assembly=AdonisUI"
+        xmlns:adonisExtensions="clr-namespace:AdonisUI.Extensions;assembly=AdonisUI"
+        xmlns:adonisUi="clr-namespace:AdonisUI;assembly=AdonisUI"
+        mc:Ignorable="d"
+        Title="Phunk | Credits" Height="510" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.DataContext>
+        <vm:CreditViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Margin="20 20 20 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel>
+                <TextBlock Text="Uber Apk Signer" FontSize="18" FontWeight="Medium"/>
+                <TextBlock Text="by @patrickfav" Foreground="LightBlue"/>
+                <Button Command="{Binding UberGithub}" Content="Github" Margin="0 5 0 0" Width="130" HorizontalAlignment="Left" Cursor="Hand" Style="{DynamicResource {x:Static adonisUi:Styles.AccentButton}}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Margin="5">
+                <TextBlock Text="Phunk uses Uber Apk Signer to Zipalign the APK and to sign it. Big thanks to Patrick Favre and fellow Contributors for this amazing tool." TextWrapping="Wrap" FontStyle="Italic"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Margin="20 5 20 20" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel>
+                <TextBlock Text="Apktool" FontSize="18" FontWeight="Medium"/>
+                <TextBlock Text="by @iBotPeaches" Foreground="LightBlue"/>
+                <Button Command="{Binding ApktoolGithub}" Content="Github" Margin="0 5 0 0" Width="130" HorizontalAlignment="Left" Cursor="Hand" Style="{DynamicResource {x:Static adonisUi:Styles.AccentButton}}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Margin="5">
+                <TextBlock Text="Phunk uses Apktool for decompiling and building apks. Big thanks to iBotPeaches and fellow Contributors for this amazing tool." TextWrapping="Wrap" FontStyle="Italic"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Margin="20 5 20 20" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel>
+                <TextBlock Text="AdonisUI" FontSize="18" FontWeight="Medium"/>
+                <TextBlock Text="by @benruehl" Foreground="LightBlue"/>
+                <Button Command="{Binding AdonisGithub}" Content="Github" Margin="0 5 0 0" Width="130" HorizontalAlignment="Left" Cursor="Hand" Style="{DynamicResource {x:Static adonisUi:Styles.AccentButton}}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Margin="5">
+                <TextBlock Text="Phunk uses AdonisUI for the stunning UI. I suck at making UI and AdonisUI saved this app thankfully. Big thanks to benruehl and contributors for this amazing UI Library." TextWrapping="Wrap" FontStyle="Italic"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Margin="20 5 20 20" Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel>
+                <TextBlock Text="Redditor" FontSize="18" FontWeight="Medium"/>
+                <TextBlock Text="by @3301_Athlestan" Foreground="LightBlue"/>
+                <Button Command="{Binding AdonisGithub}" Content="Thread" Margin="0 5 0 0" Width="130" HorizontalAlignment="Left" Cursor="Hand" Style="{DynamicResource {x:Static adonisUi:Styles.AccentButton}}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Margin="5">
+                <TextBlock Text="Last but not the least, 3301_Athlestan, the whole inspiration of this app is solely thanks to this person. Whoever you are, thank you for the wonderful guide." TextWrapping="Wrap" FontStyle="Italic"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</adonisControls:AdonisWindow>
