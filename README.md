@@ -11,7 +11,7 @@
 ![image](https://github.com/shibadevs/phunk/assets/154506302/6e662c29-de67-40ed-ba45-122656f4d6c0)
 
 ## Requirements
-* .NET (if you don't have one, once you open the app it will prompt you to download it.)
+* .NET (App will prompt you to download it if you don't have it installed)
 * JDK8+
 
 ## Credits
