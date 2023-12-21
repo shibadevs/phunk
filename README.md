@@ -1,5 +1,5 @@
-![image](https://github.com/shibadevs/phunk/assets/154506302/1cf600dc-bae7-459f-ad29-6d1ad3f62647)# Phunk
-Automatically change the package name of APK(s)
+# Phunk
+*Automatically change the package name of APK(s)*
 
 ## How to use
 1. Extract APK via Rookie Sideloader. Make sure that the APK and the OBB is in the same folder if it has one!
