@@ -12,7 +12,7 @@
 
 ## Requirements
 * .NET (App will prompt you to download it if you don't have it installed)
-* [Java Development Kit 8](https://www.oracle.com/java/technologies/downloads/)
+* [Java Development Kit 8](https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html)
 
 ## Credits
 * Uber Apk Signer
