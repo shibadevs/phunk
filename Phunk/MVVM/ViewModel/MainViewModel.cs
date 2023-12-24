@@ -460,11 +460,13 @@ namespace Phunk.MVVM.ViewModel
             }
             catch (HttpRequestException ex)
             {
-                
+                GlobalViewModel.PhunkLogs += "\n[Phunk] ! An HttpRequestException occured! " + ex.Message;
+
             }
             catch (Exception ex)
             {
-                
+                GlobalViewModel.PhunkLogs += "\n[Phunk] ! An error occured! " + ex.Message;
+
             }
         }
 
@@ -521,11 +523,12 @@ namespace Phunk.MVVM.ViewModel
             }
             catch (HttpRequestException ex)
             {
-                
+                GlobalViewModel.PhunkLogs += "\n[Phunk] ! An HttpRequestException occured! " + ex.Message;
+
             }
             catch (Exception ex)
             {
-                
+                GlobalViewModel.PhunkLogs += "\n[Phunk] ! An error occured! " + ex.Message;
             }
         }
         #endregion

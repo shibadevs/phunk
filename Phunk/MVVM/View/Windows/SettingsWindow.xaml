@@ -31,37 +31,41 @@
             <TextBox Text="{Binding GlobalViewModel.FinalOutputNameSettingsTxt, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding GlobalViewModel.IsProcessStarting, Converter={StaticResource BooleanNegationConverter}}" adonisExtensions:CursorSpotlightExtension.BackgroundBrush="Transparent" Background="#25262e" Foreground="White" adonisExtensions:WatermarkExtension.IsWatermarkVisible="True" adonisExtensions:WatermarkExtension.Watermark="Original APK Name (apkname.apk)"/>
         </StackPanel>
 
-        <StackPanel Margin="5" Grid.Row="3">
+        <StackPanel Margin="5" Grid.Row="1">
             <TextBlock Text="Custom Package Name" Margin="0 0 2 2"/>
             <TextBox Text="{Binding GlobalViewModel.CustomPackageNameSettingsTxt, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding GlobalViewModel.IsProcessStarting, Converter={StaticResource BooleanNegationConverter}}" adonisExtensions:CursorSpotlightExtension.BackgroundBrush="Transparent" Background="#25262e" Foreground="White" adonisExtensions:WatermarkExtension.IsWatermarkVisible="True" adonisExtensions:WatermarkExtension.Watermark="demo (default)"/>
         </StackPanel>
 
-        <StackPanel Margin="5" Grid.Row="1">
+        <StackPanel Margin="5" Grid.Row="2">
             <TextBlock Text="Apktool Decompile Additional Params" Margin="0 0 2 2"/>
             <TextBox Text="{Binding GlobalViewModel.DecompileAdditionalParamsSettingsTxt, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding GlobalViewModel.IsProcessStarting, Converter={StaticResource BooleanNegationConverter}}" adonisExtensions:CursorSpotlightExtension.BackgroundBrush="Transparent" Background="#25262e" Foreground="White" adonisExtensions:WatermarkExtension.IsWatermarkVisible="True" adonisExtensions:WatermarkExtension.Watermark="Phunk Additional Params"/>
         </StackPanel>
 
-        <StackPanel Margin="5" Grid.Row="2">
+        <StackPanel Margin="5" Grid.Row="3">
             <TextBlock Text="Uber Apk Signer Additional Params" Margin="0 0 2 2"/>
             <TextBox Text="{Binding GlobalViewModel.SigningZipaligningParamsSettingsTxt, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding GlobalViewModel.IsProcessStarting, Converter={StaticResource BooleanNegationConverter}}" adonisExtensions:CursorSpotlightExtension.BackgroundBrush="Transparent" Background="#25262e" Foreground="White" adonisExtensions:WatermarkExtension.IsWatermarkVisible="True" adonisExtensions:WatermarkExtension.Watermark="Phunk Additional Params"/>
         </StackPanel>
 
         <Grid Margin="5" Grid.Row="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <StackPanel IsEnabled="{Binding GlobalViewModel.IsProcessStarting, Converter={StaticResource BooleanNegationConverter}}">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Configs" Margin="0 0 2 2"/>
-                    <TextBlock FontStyle="Italic" Text="(features are not yet available)" Margin="0 0 2 2"/>
+            <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2">
+                <TextBlock Text="Configs" Margin="0 0 2 2"/>
+                <TextBlock FontStyle="Italic" Text="(features are not yet available)" Margin="0 0 2 2"/>
+            </StackPanel>
 
-                </StackPanel>
+            <StackPanel Margin="0 4 0 0" Grid.Row="1" IsEnabled="{Binding GlobalViewModel.IsProcessStarting, Converter={StaticResource BooleanNegationConverter}}">
                 <CheckBox Content="Auto Clean" ToolTip="Cleans up the temp folder before process starts"/>
                 <CheckBox Content="Use Apktool CLI" Margin="0 4 0 0" ToolTip="If you have apktool installed already, you can ask Phunk to use the cli instead"/>
             </StackPanel>
 
-            <StackPanel Margin="20 15 0 0" Grid.Column="1" IsEnabled="{Binding GlobalViewModel.IsProcessStarting, Converter={StaticResource BooleanNegationConverter}}">
+            <StackPanel Grid.Row="1" Margin="8 0 0 0" Grid.Column="1" IsEnabled="{Binding GlobalViewModel.IsProcessStarting, Converter={StaticResource BooleanNegationConverter}}">
                 <CheckBox Content="Auto Update Phunk" Margin="0 4 0 0" ToolTip="Auto updates Phunk"/>
             </StackPanel>
 
