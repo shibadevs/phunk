@@ -7,9 +7,65 @@
         xmlns:adonisUi="clr-namespace:AdonisUI;assembly=AdonisUI"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Phunk.MVVM.View.Windows"
+        xmlns:converter="clr-namespace:Phunk.Converter"
+        xmlns:vm="clr-namespace:Phunk.MVVM.ViewModel"
         mc:Ignorable="d"
-        Title="Settings" Height="200" Width="200" ResizeMode="CanMinimize">
-    <Grid>
-        
+        Title="Phunk | Settings" Height="330" Width="350" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <vm:SettingsViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <converter:BooleanNegationConverter x:Key="BooleanNegationConverter"/>
+    </Window.Resources>
+    <Grid Margin="10 5 10 10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Margin="5">
+            <TextBlock Text="Output Name" Margin="0 0 2 2"/>
+            <TextBox Text="{Binding GlobalViewModel.FinalOutputNameSettingsTxt, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding GlobalViewModel.IsProcessStarting, Converter={StaticResource BooleanNegationConverter}}" adonisExtensions:CursorSpotlightExtension.BackgroundBrush="Transparent" Background="#25262e" Foreground="White" adonisExtensions:WatermarkExtension.IsWatermarkVisible="True" adonisExtensions:WatermarkExtension.Watermark="Original APK Name (apkname.apk)"/>
+        </StackPanel>
+
+        <StackPanel Margin="5" Grid.Row="3">
+            <TextBlock Text="Custom Package Name" Margin="0 0 2 2"/>
+            <TextBox Text="{Binding GlobalViewModel.CustomPackageNameSettingsTxt, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding GlobalViewModel.IsProcessStarting, Converter={StaticResource BooleanNegationConverter}}" adonisExtensions:CursorSpotlightExtension.BackgroundBrush="Transparent" Background="#25262e" Foreground="White" adonisExtensions:WatermarkExtension.IsWatermarkVisible="True" adonisExtensions:WatermarkExtension.Watermark="demo (default)"/>
+        </StackPanel>
+
+        <StackPanel Margin="5" Grid.Row="1">
+            <TextBlock Text="Apktool Decompile Additional Params" Margin="0 0 2 2"/>
+            <TextBox Text="{Binding GlobalViewModel.DecompileAdditionalParamsSettingsTxt, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding GlobalViewModel.IsProcessStarting, Converter={StaticResource BooleanNegationConverter}}" adonisExtensions:CursorSpotlightExtension.BackgroundBrush="Transparent" Background="#25262e" Foreground="White" adonisExtensions:WatermarkExtension.IsWatermarkVisible="True" adonisExtensions:WatermarkExtension.Watermark="Phunk Additional Params"/>
+        </StackPanel>
+
+        <StackPanel Margin="5" Grid.Row="2">
+            <TextBlock Text="Uber Apk Signer Additional Params" Margin="0 0 2 2"/>
+            <TextBox Text="{Binding GlobalViewModel.SigningZipaligningParamsSettingsTxt, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding GlobalViewModel.IsProcessStarting, Converter={StaticResource BooleanNegationConverter}}" adonisExtensions:CursorSpotlightExtension.BackgroundBrush="Transparent" Background="#25262e" Foreground="White" adonisExtensions:WatermarkExtension.IsWatermarkVisible="True" adonisExtensions:WatermarkExtension.Watermark="Phunk Additional Params"/>
+        </StackPanel>
+
+        <Grid Margin="5" Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel IsEnabled="{Binding GlobalViewModel.IsProcessStarting, Converter={StaticResource BooleanNegationConverter}}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Configs" Margin="0 0 2 2"/>
+                    <TextBlock FontStyle="Italic" Text="(features are not yet available)" Margin="0 0 2 2"/>
+
+                </StackPanel>
+                <CheckBox Content="Auto Clean" ToolTip="Cleans up the temp folder before process starts"/>
+                <CheckBox Content="Use Apktool CLI" Margin="0 4 0 0" ToolTip="If you have apktool installed already, you can ask Phunk to use the cli instead"/>
+            </StackPanel>
+
+            <StackPanel Margin="20 15 0 0" Grid.Column="1" IsEnabled="{Binding GlobalViewModel.IsProcessStarting, Converter={StaticResource BooleanNegationConverter}}">
+                <CheckBox Content="Auto Update Phunk" Margin="0 4 0 0" ToolTip="Auto updates Phunk"/>
+            </StackPanel>
+
+
+        </Grid>
     </Grid>
 </adonisControls:AdonisWindow>

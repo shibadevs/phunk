@@ -19,15 +19,12 @@ C:\Users\Dichi\source\repos\Phunk\Phunk\obj\Debug\net6.0-windows\refint\Phunk.dl
 C:\Users\Dichi\source\repos\Phunk\Phunk\obj\Debug\net6.0-windows\Phunk.pdb
 C:\Users\Dichi\source\repos\Phunk\Phunk\obj\Debug\net6.0-windows\Phunk.genruntimeconfig.cache
 C:\Users\Dichi\source\repos\Phunk\Phunk\obj\Debug\net6.0-windows\ref\Phunk.dll
-C:\Users\Dichi\source\repos\Phunk\Phunk\bin\Debug\net6.0-windows\AdonisUI.dll
-C:\Users\Dichi\source\repos\Phunk\Phunk\bin\Debug\net6.0-windows\AdonisUI.ClassicTheme.dll
 C:\Users\Dichi\source\repos\Phunk\Phunk\obj\Debug\net6.0-windows\Phunk.csproj.AssemblyReference.cache
 C:\Users\Dichi\source\repos\Phunk\Phunk\obj\Debug\net6.0-windows\App.baml
-C:\Users\Dichi\source\repos\Phunk\Phunk\obj\Debug\net6.0-windows\Phunk.csproj.CopyComplete
 C:\Users\Dichi\source\repos\Phunk\Phunk\obj\Debug\net6.0-windows\MVVM\View\Windows\SettingsWindow.g.cs
 C:\Users\Dichi\source\repos\Phunk\Phunk\obj\Debug\net6.0-windows\MVVM\View\Windows\SettingsWindow.baml
-C:\Users\Dichi\source\repos\Phunk\Phunk\bin\Debug\net6.0-windows\Newtonsoft.Json.dll
 C:\Users\Dichi\source\repos\Phunk\Phunk\obj\Debug\net6.0-windows\MVVM\View\Windows\ChangeWindow.g.cs
 C:\Users\Dichi\source\repos\Phunk\Phunk\obj\Debug\net6.0-windows\MVVM\View\Windows\ChangeWindow.baml
 C:\Users\Dichi\source\repos\Phunk\Phunk\obj\Debug\net6.0-windows\MVVM\View\Windows\CreditsWindow.g.cs
 C:\Users\Dichi\source\repos\Phunk\Phunk\obj\Debug\net6.0-windows\MVVM\View\Windows\CreditsWindow.baml
+C:\Users\Dichi\source\repos\Phunk\Phunk\obj\Debug\net6.0-windows\Phunk.csproj.Fody.CopyLocal.cache

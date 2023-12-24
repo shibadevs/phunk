@@ -30,14 +30,16 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         
-        <Grid Margin="10 5 10 10">
+        <Grid Margin="6 5 0 0">
             <StackPanel Width="150">
                 <Button Content="Clear Logs" Cursor="Hand" Margin="5" Command="{Binding ClearLogsCommand}"/>
+                <Button Content="Open Temp Folder" Cursor="Hand" Margin="5" Command="{Binding OpenTempCommand}"/>
+                <Button Content="Advance Tools" IsEnabled="False" Cursor="Hand" Margin="5"/>
                 <Button Content="Credits" Cursor="Hand" Margin="5" Command="{Binding CreditsCommand}"/>
                 <TextBlock Text="Made by Shiba" TextAlignment="Center" FontStyle="Italic"/>
             </StackPanel>
         </Grid>
-        <Grid Grid.ColumnSpan="2">
+        <Grid Grid.Column="2">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -45,7 +47,7 @@
                 </Grid.RowDefinitions>
                 
                 <Border Height="{Binding Path=TitleBarActualHeight, RelativeSource={RelativeSource AncestorType={x:Type adonisControls:AdonisWindow}}}"/>
-                <GroupBox Header="Phunker" Margin="20 10 20 0">
+                <GroupBox Header="Phunker" Margin="10 10 10 0">
                     <Grid Margin="5 0 5 5">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -119,7 +121,7 @@
                     </Grid>
                 </GroupBox>
 
-                <Button Content="Start" IsEnabled="{Binding GlobalViewModel.CanStart}" Cursor="Hand" Command="{Binding StartCommand}" Grid.Row="1" Margin="5" Width="450" Height="40" HorizontalAlignment="Center"
+                <Button Content="Start" IsEnabled="{Binding GlobalViewModel.CanStart}" Cursor="Hand" Command="{Binding StartCommand}" Grid.Row="1" Margin="5" Width="620" Height="40" HorizontalAlignment="Center"
                         Style="{DynamicResource {x:Static adonisUi:Styles.AccentButton}}"/>
                 
             </Grid>

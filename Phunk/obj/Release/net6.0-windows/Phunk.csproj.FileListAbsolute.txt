@@ -22,9 +22,9 @@ C:\Users\Dichi\source\repos\Phunk\Phunk\obj\Release\net6.0-windows\Phunk.Generat
 C:\Users\Dichi\source\repos\Phunk\Phunk\obj\Release\net6.0-windows\Phunk.AssemblyInfoInputs.cache
 C:\Users\Dichi\source\repos\Phunk\Phunk\obj\Release\net6.0-windows\Phunk.AssemblyInfo.cs
 C:\Users\Dichi\source\repos\Phunk\Phunk\obj\Release\net6.0-windows\Phunk.csproj.CoreCompileInputs.cache
+C:\Users\Dichi\source\repos\Phunk\Phunk\obj\Release\net6.0-windows\Phunk.csproj.Fody.CopyLocal.cache
 C:\Users\Dichi\source\repos\Phunk\Phunk\obj\Release\net6.0-windows\Phunk.dll
 C:\Users\Dichi\source\repos\Phunk\Phunk\obj\Release\net6.0-windows\refint\Phunk.dll
 C:\Users\Dichi\source\repos\Phunk\Phunk\obj\Release\net6.0-windows\Phunk.pdb
 C:\Users\Dichi\source\repos\Phunk\Phunk\obj\Release\net6.0-windows\Phunk.genruntimeconfig.cache
 C:\Users\Dichi\source\repos\Phunk\Phunk\obj\Release\net6.0-windows\ref\Phunk.dll
-C:\Users\Dichi\source\repos\Phunk\Phunk\obj\Release\net6.0-windows\Phunk.csproj.Fody.CopyLocal.cache

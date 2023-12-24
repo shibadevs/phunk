@@ -12,10 +12,17 @@ namespace Phunk.MVVM.ViewModel
     {
         public static GlobalViewModel Instance { get; } = new GlobalViewModel();
 
-        /// <summary>
-        /// Status text to let the user know what is happening
-        /// </summary>
-        private string? _statusText;
+		private bool _isProcessStarting;
+		public bool IsProcessStarting
+		{
+			get { return _isProcessStarting; }
+			set { _isProcessStarting = value; OnPropertyChanged(); }
+		}
+
+		/// <summary>
+		/// Status text to let the user know what is happening
+		/// </summary>
+		private string? _statusText;
 		public string? StatusText
 		{
 			get { return _statusText; }
@@ -69,13 +76,70 @@ namespace Phunk.MVVM.ViewModel
 			set { _canStart = value; OnPropertyChanged(); }
 		}
 
-		private string _newApkName;
+		private string? _newApkName;
 
-		public string NewApkName
+		public string? NewApkName
 		{
 			get { return _newApkName; }
 			set { _newApkName = value; OnPropertyChanged(); }
 		}
 
+		#region Settings
+		/// <summary>
+		/// Main Settings
+		/// </summary>
+		private string? _finalOutputNameSettingsTxt;
+		public string? FinalOutputNameSettingsTxt
+        {
+			get { return _finalOutputNameSettingsTxt; }
+			set { _finalOutputNameSettingsTxt = value; OnPropertyChanged(); }
+		}
+
+		private string? _decompileAdditionalParamsSettingsTxt;
+		public string? DecompileAdditionalParamsSettingsTxt
+        {
+			get { return _decompileAdditionalParamsSettingsTxt; }
+			set { _decompileAdditionalParamsSettingsTxt = value; OnPropertyChanged(); }
+		}
+
+		private string? _signingZipaligningParamsSettingsTxt;
+		public string? SigningZipaligningParamsSettingsTxt
+        {
+			get { return _signingZipaligningParamsSettingsTxt; }
+			set { _signingZipaligningParamsSettingsTxt = value; OnPropertyChanged(); }
+		}
+
+		private string? _customPackageNameSettingsTxt;
+		public string? CustomPackageNameSettingsTxt
+		{
+			get { return _customPackageNameSettingsTxt; }
+			set { _customPackageNameSettingsTxt = value; OnPropertyChanged(); }
+		}
+
+
+		/// <summary>
+		/// Configs
+		/// </summary>
+		private bool _autoCleanSettingsBoolean;
+		public bool AutoCleanSettingsBoolean
+		{
+			get { return _autoCleanSettingsBoolean; }
+			set { _autoCleanSettingsBoolean = value; OnPropertyChanged(); }
+		}
+
+		private bool _useApkToolSettingsBoolean;
+		public bool UseApkToolSettingsBoolean
+        {
+			get { return _useApkToolSettingsBoolean; }
+			set { _useApkToolSettingsBoolean = value; OnPropertyChanged(); }
+		}
+
+		private bool _autoUpdatePhunkSettingsBoolean;
+		public bool AutoUpdatePhunkSettingsBoolean
+		{
+			get { return _autoUpdatePhunkSettingsBoolean; }
+			set { _autoUpdatePhunkSettingsBoolean = value; OnPropertyChanged(); }
+		}
+		#endregion
 	}
 }

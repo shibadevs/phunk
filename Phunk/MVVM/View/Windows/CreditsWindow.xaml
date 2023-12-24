@@ -81,7 +81,7 @@
             <StackPanel>
                 <TextBlock Text="Redditor" FontSize="18" FontWeight="Medium"/>
                 <TextBlock Text="by @3301_Athlestan" Foreground="LightBlue"/>
-                <Button Command="{Binding AdonisGithub}" Content="Thread" Margin="0 5 0 0" Width="130" HorizontalAlignment="Left" Cursor="Hand" Style="{DynamicResource {x:Static adonisUi:Styles.AccentButton}}"/>
+                <Button Command="{Binding RedditThread}" Content="Thread" Margin="0 5 0 0" Width="130" HorizontalAlignment="Left" Cursor="Hand" Style="{DynamicResource {x:Static adonisUi:Styles.AccentButton}}"/>
             </StackPanel>
 
             <StackPanel Grid.Column="1" Margin="5">

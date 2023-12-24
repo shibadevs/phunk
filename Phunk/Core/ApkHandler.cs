@@ -13,14 +13,14 @@ namespace Phunk.Core
     public class ApkHandler
     {
         public GlobalViewModel GlobalViewModel { get; } = GlobalViewModel.Instance;
-        public int DecompileApkTool(string apktoolPath, string apkPath, string outputApkPath)
+        public int DecompileApkTool(string apktoolPath, string apkPath, string outputApkPath, string additionalParams = "")
         {
             try
             {
                 ProcessStartInfo psi = new ProcessStartInfo
                 {
                     FileName = "java",
-                    Arguments = $"-jar \"{apktoolPath}\" -f d \"{apkPath}\" -o \"{outputApkPath}\"",
+                    Arguments = $"-jar \"{apktoolPath}\" -f d \"{apkPath}\" -o \"{outputApkPath}\"" + " " + additionalParams,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     UseShellExecute = false,
@@ -107,14 +107,14 @@ namespace Phunk.Core
             }
         }
 
-        public void SignApkTool(string ubersignerPath, string apkPath, string outputApkPath)
+        public void SignApkTool(string ubersignerPath, string apkPath, string outputApkPath, string additionalParams = "")
         {
             try
             {
                 ProcessStartInfo psi = new ProcessStartInfo
                 {
                     FileName = "java",
-                    Arguments = $"-jar \"{ubersignerPath}\" -a \"{apkPath}\" -o \"{outputApkPath}\" --allowResign",
+                    Arguments = $"-jar \"{ubersignerPath}\" -a \"{apkPath}\" -o \"{outputApkPath}\" --allowResign" + " " + additionalParams,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     UseShellExecute = false,

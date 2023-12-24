@@ -68,6 +68,8 @@ namespace Phunk.MVVM.ViewModel
         public RelayCommand SelectAPKCommand { get; set; }
         public RelayCommand CreditsCommand { get; set; }
         public RelayCommand ClearLogsCommand { get; set; }
+
+        public RelayCommand OpenTempCommand { get; set; }
         #endregion
 
         #region DOWNLOADING
@@ -99,7 +101,16 @@ namespace Phunk.MVVM.ViewModel
                 }
             });
 
-            SettingsCommand = new RelayCommand(o => { });
+            SettingsCommand = new RelayCommand(o => { 
+                SettingsWindow settingsWindow = new SettingsWindow();
+                settingsWindow.Show();
+            });
+
+            OpenTempCommand = new RelayCommand(o =>
+            {
+                Process.Start("explorer.exe", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp"));
+            });
+
             SelectAPKCommand = new RelayCommand(o => {
                 OpenFileDialog openFileDialog = new OpenFileDialog();
                 openFileDialog.Filter = "APK files (*.apk)|*.apk";
@@ -127,13 +138,28 @@ namespace Phunk.MVVM.ViewModel
             });
         }
 
+        /// <summary>
+        /// When the application starts up, we call the Initialize function first
+        /// </summary>
         private void Initialize()
         {
+            // UI
             GlobalViewModel.StatusText = "(￢з￢) Waiting for User";
             GlobalViewModel.CanStart = false;
             GlobalViewModel.ProgressValue = 0;
+            GlobalViewModel.IsProcessStarting = false;
 
+            // Settings
+            GlobalViewModel.FinalOutputNameSettingsTxt = "";
+            GlobalViewModel.DecompileAdditionalParamsSettingsTxt = "";
+            GlobalViewModel.SigningZipaligningParamsSettingsTxt = "";
+            GlobalViewModel.CustomPackageNameSettingsTxt = "";
 
+            GlobalViewModel.AutoCleanSettingsBoolean = false;
+            GlobalViewModel.UseApkToolSettingsBoolean = false;
+            GlobalViewModel.AutoUpdatePhunkSettingsBoolean = false;
+
+            // Apk
             OriginalPackageName = "n/a";
             FilePath = "n/a";
             ApkName = "n/a";
@@ -147,6 +173,7 @@ namespace Phunk.MVVM.ViewModel
         /// <returns></returns>
         private async Task PerformTaskAsync()
         {
+            GlobalViewModel.IsProcessStarting = true;
             GlobalViewModel.StatusText = "((⇀‸↼)) Checking Requirements";
             await Task.Delay(500);
             await CheckDependency();
@@ -204,17 +231,23 @@ namespace Phunk.MVVM.ViewModel
 
                 await SignApk(binFolderPath, handler);
 
+                GlobalViewModel.StatusText = "((⇀‸↼)) Preparing for final output";
+                GlobalViewModel.PhunkLogs += "\n[Phunk] ~ Preparing for final output";
+                await FinalTaskOut();
+
                 GlobalViewModel.ProgressValue = 100;
-                GlobalViewModel.StatusText = "(人´∀`) Success! -> Saved @ Temp -> " + ApkName.Split(".")[0] + "-aligned-debugSigned.apk";
-                GlobalViewModel.PhunkLogs += "\n[Phunk] (人´∀`) " + "Saved @ Temp -> " + ApkName.Split(".")[0] + "-aligned-debugSigned.apk"; ;
+                GlobalViewModel.StatusText = "(人´∀`) Success! -> Saved as " + GlobalViewModel.FinalOutputNameSettingsTxt;
+                GlobalViewModel.PhunkLogs += "\n[Phunk] ~ Success! -> Saved as " + GlobalViewModel.FinalOutputNameSettingsTxt;
 
                 GlobalViewModel.CanStart = true;
                 Process.Start("explorer.exe", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp"));
                 //AdonisUI.Controls.MessageBox.Show("The Package Name has been replaced! You can now sideload the game!", "(ノ^∇^) Success!", AdonisUI.Controls.MessageBoxButton.OK, AdonisUI.Controls.MessageBoxImage.None);
+                GlobalViewModel.IsProcessStarting = false;
             }
             else
             {
                 GlobalViewModel.StatusText = "( ´-ω-` ) Can't start the task because you having missing requirements: " + GlobalViewModel.MissingRequirements;
+                GlobalViewModel.IsProcessStarting = false;
             }
         }
 
@@ -243,12 +276,16 @@ namespace Phunk.MVVM.ViewModel
             }
             catch (Exception ex)
             {
-                
+                GlobalViewModel.PhunkLogs += "\n[Phunk] ! An error occured! " + ex.Message;
             }
             
             return Task.Delay(1000);
         }
 
+        /// <summary>
+        /// Downloads the required files for doing the process
+        /// </summary>
+        /// <returns></returns>
         private async Task DownloadFiles()
         {
             // Download APK Tools
@@ -266,11 +303,17 @@ namespace Phunk.MVVM.ViewModel
             await Task.Delay(500);
         }
 
+        /// <summary>
+        /// Decompile APK to get its content
+        /// </summary>
+        /// <param name="binFolderPath">The location of the bin folder where the tools were downloaded</param>
+        /// <param name="handler">gets the ApkHandler in order to call the function for decompiling the Apk</param>
+        /// <returns></returns>
         private async Task DecompileApk(string binFolderPath, ApkHandler handler)
         {
             // Run APK Tool
 
-            var result = await Task.Run(() => handler.DecompileApkTool(Path.Combine(binFolderPath, "apktool.jar"), FilePath, Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp/extracted")));
+            var result = await Task.Run(() => handler.DecompileApkTool(Path.Combine(binFolderPath, "apktool.jar"), FilePath, Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp/extracted"), GlobalViewModel.DecompileAdditionalParamsSettingsTxt));
 
             if (result == 0)
             {
@@ -289,8 +332,19 @@ namespace Phunk.MVVM.ViewModel
             return;
         }
 
+        /// <summary>
+        /// Streams through the decompiled APK and get information such as its package name,
+        /// and replace all of its original package name to a custom one.
+        /// </summary>
+        /// <returns></returns>
         private async Task StreamApk()
         {
+            string customPackageName = "";
+            if (GlobalViewModel.CustomPackageNameSettingsTxt == "")
+                customPackageName = "phunk";
+            else
+                customPackageName = GlobalViewModel.CustomPackageNameSettingsTxt;
+
             string extracted_path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp/extracted");
             string packageValue = Util.GetPackageValue(Path.Combine(extracted_path, "AndroidManifest.xml"), "package=");
 
@@ -298,7 +352,8 @@ namespace Phunk.MVVM.ViewModel
             OriginalPackageName = packageValue;
 
             CurrentPackageName = OriginalPackageName.Split(".")[1].Split(".")[0];
-            string final_package_name = OriginalPackageName.Replace(CurrentPackageName, "demo");
+            string final_package_name = OriginalPackageName.Replace(CurrentPackageName, customPackageName);
+
             CurrentPackageName = final_package_name;
 
             await Task.Run(() =>
@@ -344,10 +399,13 @@ namespace Phunk.MVVM.ViewModel
 
             await Task.Run(() =>
             {
-                apkHandler.BuildApkTool(Path.Combine(binFolderPath, "apktool.jar"), extracted_path, Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp/" + ApkName));
+                apkHandler.BuildApkTool(Path.Combine(binFolderPath, "apktool.jar"), extracted_path, Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp/" + "temp.apk"));
             });
 
             GlobalViewModel.ProgressValue = 100;
+            if (GlobalViewModel.FinalOutputNameSettingsTxt == "")
+                GlobalViewModel.FinalOutputNameSettingsTxt = ApkName;
+
             await Task.Delay(500);
         }
 
@@ -357,10 +415,22 @@ namespace Phunk.MVVM.ViewModel
 
             await Task.Run(() =>
             {
-                apkHandler.SignApkTool(Path.Combine(binFolderPath, "uberapksigner.jar"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp/" + ApkName), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp"));
+                apkHandler.SignApkTool(Path.Combine(binFolderPath, "uberapksigner.jar"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp/" + "temp.apk"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp"), GlobalViewModel.SigningZipaligningParamsSettingsTxt);
             });
 
             Task.Delay(500);
+        }
+
+        private async Task FinalTaskOut()
+        {
+            string temp_path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp");
+            string output = temp_path + "/temp-aligned-debugSigned.apk";
+
+            if (File.Exists(output)) {
+                Util.RenameFile(output, GlobalViewModel.FinalOutputNameSettingsTxt);
+            }
+
+            await Task.Delay(500);
         }
 
         #region Downloading Functions
