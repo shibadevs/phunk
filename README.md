@@ -4,9 +4,10 @@
 ## How to use
 1. Extract APK via Rookie Sideloader. Make sure that the APK and the OBB is in the same folder if it has one!
 2. Open Phunk
-3. Click Select App and navigate to your desired APK and select it
+3. Click Select Apk and navigate to your desired APK and select it
 4. Click Start and wait for it to finish. Check at the bottom part, wait until it says success or until it opens the folder.
-5. Select your APK and your OBB if you have one, drag and drop to Rookie Sideloader and you should be good to go.
+5. in the opened folder, select your APK and your OBB if you have one, drag and drop to Rookie Sideloader and you should be good to go.
+6. NOTE: don't forget to delete the files inside the temp folder when finished. (_not neccesarily needed as Phunk overwrites anything inside the temp, but its good to clean it once in a while._)
 
 ![image](https://github.com/shibadevs/phunk/assets/154506302/6e662c29-de67-40ed-ba45-122656f4d6c0)
 
