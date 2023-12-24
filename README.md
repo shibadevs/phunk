@@ -9,7 +9,14 @@
 5. in the opened folder, select your APK and your OBB if you have one, drag and drop to Rookie Sideloader and you should be good to go.
 6. NOTE: don't forget to delete the files inside the temp folder when finished. (_not neccesarily needed as Phunk overwrites anything inside the temp, but its good to clean it once in a while._)
 
-![image](https://github.com/shibadevs/phunk/assets/154506302/6e662c29-de67-40ed-ba45-122656f4d6c0)
+## Settings Guide
+- Output Name: default is _apkname.apk_ where _apkname_ is the original name of the APK.
+- Custom Package Name: default is _phunk_ you can put any names here as long as there are no spaces.
+- Apktool & Uber Apk Signer Additional Params: Please look at their github page for the parameters. This was added so that if there are games that are pretty stubborn to decompile or to sign, you could add your own parameters
+instead.
+
+
+![image](https://i.imgur.com/aEvKOcQ.png)
 
 ## Requirements
 * .NET (App will prompt you to download it if you don't have it installed)
