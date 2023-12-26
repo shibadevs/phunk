@@ -23,6 +23,10 @@ instead.
 * .NET (App will prompt you to download it if you don't have it installed)
 * [Java Development Kit 8](https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html)
 
+## How it works
+![image](https://github.com/shibadevs/phunk/assets/154506302/b472a882-de6f-4d1d-996e-d9d06937184d)
+
+
 ## Credits
 * Uber Apk Signer
 * Apktools
