@@ -2,6 +2,7 @@
 *Automatically change the package name of APK(s)*
 
 ## How to use
+NOTE: Please see requirements below for this application to work.
 1. Extract APK via Rookie Sideloader. Make sure that the APK and the OBB is in the same folder if it has one!
 2. Open Phunk
 3. Click Select Apk and navigate to your desired APK and select it
