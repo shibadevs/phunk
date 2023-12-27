@@ -1,16 +1,19 @@
-﻿using System;
+﻿using Phunk.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Phunk.Core
 {
     public class ReqChecker
     {
-        public static bool Check(string value, bool checkJava = false)
+        public GlobalViewModel GlobalViewModel { get; } = GlobalViewModel.Instance;
+        public bool Check(string value, bool checkJava = false)
         {
             return checkJava == false ? IsCommandAvailable(value) : IsJavaVersionValid(value);
         }
@@ -40,8 +43,10 @@ namespace Phunk.Core
             }
         }
 
-        static bool IsJavaVersionValid(string command)
+        public bool IsJavaVersionValid(string command)
         {
+            string versionstr = "";
+
             try
             {
                 using (Process process = new Process())
@@ -56,16 +61,16 @@ namespace Phunk.Core
                     string output = process.StandardError.ReadToEnd();
                     process.WaitForExit();
 
-                    // Check if the command execution was successful
                     if (process.ExitCode == 0)
                     {
-                        // Extract the version information from the output
-                        Match match = Regex.Match(output, @"version ""(\d+\.\d+)");
+                        Match match = Regex.Match(output, @"version ""(\d+(\.\d+(_\d+)?)?)");
+
                         if (match.Success)
                         {
-                            // Parse the version and check if it's JDK 8 or higher
-                            string versionString = match.Groups[1].Value;
-                            if (double.TryParse(versionString, out double version) && version >= 1.8)
+                            string versionString = match.Groups[1].Value.Trim();
+                            versionstr = versionString;
+
+                            if (Version.TryParse(versionString, out Version version) && version.Major == 1 && version.Minor >= 8)
                             {
                                 return true;
                             }
@@ -73,11 +78,13 @@ namespace Phunk.Core
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // Handle exceptions if needed
+                GlobalViewModel.PhunkLogs += "\n[Phunk] There was an error checking for the requirements. " + ex.ToString();
+                GlobalViewModel.CanStart = true;
             }
 
+            GlobalViewModel.PhunkLogs += "\n[Phunk] Version is not up to date: " + versionstr;
             return false;
         }
     }

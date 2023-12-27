@@ -257,11 +257,12 @@ namespace Phunk.MVVM.ViewModel
         /// <returns></returns>
         private Task CheckDependency()
         {
+            ReqChecker reqChecker = new ReqChecker();
             try
             {
-                var java = ReqChecker.Check("java", checkJava: true);
+                var java = reqChecker.Check("java", checkJava: true);
                 
-                GlobalViewModel.MissingRequirements += !java ? " Java (JDK 8+) " : "";
+                GlobalViewModel.MissingRequirements += !java ? " Java 8+ " : "";
 
                 if (GlobalViewModel.MissingRequirements == "")
                 {
