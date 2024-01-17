@@ -10,7 +10,11 @@
         xmlns:converter="clr-namespace:Phunk.Converter"
         xmlns:vm="clr-namespace:Phunk.MVVM.ViewModel"
         mc:Ignorable="d"
+<<<<<<< HEAD
         Title="Phunk | Settings" Height="330" Width="350" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterScreen">
+=======
+        Title="Phunk | Settings" Height="375" Width="350" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterScreen">
+>>>>>>> 8138598 (Fixed Java Issue and Added Custom Java Path)
     <Window.DataContext>
         <vm:SettingsViewModel/>
     </Window.DataContext>
@@ -24,6 +28,10 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+<<<<<<< HEAD
+=======
+            <RowDefinition Height="auto"/>
+>>>>>>> 8138598 (Fixed Java Issue and Added Custom Java Path)
         </Grid.RowDefinitions>
 
         <StackPanel Margin="5">
@@ -45,8 +53,29 @@
             <TextBlock Text="Uber Apk Signer Additional Params" Margin="0 0 2 2"/>
             <TextBox Text="{Binding GlobalViewModel.SigningZipaligningParamsSettingsTxt, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding GlobalViewModel.IsProcessStarting, Converter={StaticResource BooleanNegationConverter}}" adonisExtensions:CursorSpotlightExtension.BackgroundBrush="Transparent" Background="#25262e" Foreground="White" adonisExtensions:WatermarkExtension.IsWatermarkVisible="True" adonisExtensions:WatermarkExtension.Watermark="Phunk Additional Params"/>
         </StackPanel>
+<<<<<<< HEAD
 
         <Grid Margin="5" Grid.Row="4">
+=======
+        
+        <StackPanel Margin="5" Grid.Row="4">
+            <TextBlock Text="Custom Java Path" Margin="0 0 2 2"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <StackPanel Orientation="Horizontal">
+                    <CheckBox x:Name="IsCustomJavaPath" IsChecked="{Binding GlobalViewModel.IsCustomJavaPath}"/>
+                    <Button Cursor="Hand" Command="{Binding SelectJavaFolderPath}" Content="Select" IsEnabled="{Binding GlobalViewModel.IsCustomJavaPath}"/>
+                </StackPanel>
+                <TextBox Grid.Column="1" Text="{Binding GlobalViewModel.JavaPathFolderSettingsTxt, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" adonisExtensions:CursorSpotlightExtension.BackgroundBrush="Transparent" Background="#25262e" Foreground="White" adonisExtensions:WatermarkExtension.IsWatermarkVisible="True" adonisExtensions:WatermarkExtension.Watermark="Path to Java Folder"/>
+            </Grid>
+        </StackPanel>
+
+        <Grid Margin="5" Grid.Row="5">
+>>>>>>> 8138598 (Fixed Java Issue and Added Custom Java Path)
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
@@ -68,8 +97,11 @@
             <StackPanel Grid.Row="1" Margin="8 0 0 0" Grid.Column="1" IsEnabled="{Binding GlobalViewModel.IsProcessStarting, Converter={StaticResource BooleanNegationConverter}}">
                 <CheckBox Content="Auto Update Phunk" Margin="0 4 0 0" ToolTip="Auto updates Phunk"/>
             </StackPanel>
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 8138598 (Fixed Java Issue and Added Custom Java Path)
         </Grid>
     </Grid>
 </adonisControls:AdonisWindow>

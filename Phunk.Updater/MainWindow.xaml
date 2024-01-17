@@ -15,7 +15,11 @@
     <Window.Style>
         <Style TargetType="Window" BasedOn="{StaticResource {x:Type Window}}"/>
     </Window.Style>
+<<<<<<< HEAD
     <Border Background="#2a2b34" CornerRadius="20 20 0 0">
+=======
+    <Border Background="#2a2b34" CornerRadius="8 8 0 0">
+>>>>>>> 8138598 (Fixed Java Issue and Added Custom Java Path)
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -27,7 +31,11 @@
                 <TextBlock Text="Tools for Quest" FontSize="11" FontWeight="Light" Foreground="GhostWhite" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Grid.Row="2">
+<<<<<<< HEAD
                 <TextBlock Text="((⇀‸↼))" TextAlignment="Center" FontSize="10" Foreground="#6380e1" Padding="5"/>
+=======
+                <TextBlock Text="((⇀‸↼)) Checking for updates" TextAlignment="Center" FontSize="10" Foreground="#6380e1" Padding="5"/>
+>>>>>>> 8138598 (Fixed Java Issue and Added Custom Java Path)
                 <ProgressBar Height="5" BorderThickness="0"/>
             </StackPanel>
         </Grid>

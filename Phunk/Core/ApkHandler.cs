@@ -2,6 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+<<<<<<< HEAD
+=======
+using System.IO;
+>>>>>>> 8138598 (Fixed Java Issue and Added Custom Java Path)
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,8 +23,15 @@ namespace Phunk.Core
             {
                 ProcessStartInfo psi = new ProcessStartInfo
                 {
+<<<<<<< HEAD
                     FileName = "java",
                     Arguments = $"-jar \"{apktoolPath}\" -f d \"{apkPath}\" -o \"{outputApkPath}\"" + " " + additionalParams,
+=======
+                    FileName = !GlobalViewModel.IsCustomJavaPath && GlobalViewModel.JavaPathFolderSettingsTxt.Length == 0
+                        ? Path.Combine(GlobalViewModel.JavaPathFolderSettingsTxt + "/bin/java.exe")
+                        : "java",
+                Arguments = $"-jar \"{apktoolPath}\" -f d \"{apkPath}\" -o \"{outputApkPath}\"" + " " + additionalParams,
+>>>>>>> 8138598 (Fixed Java Issue and Added Custom Java Path)
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     UseShellExecute = false,
@@ -64,7 +75,13 @@ namespace Phunk.Core
             {
                 ProcessStartInfo psi = new ProcessStartInfo
                 {
+<<<<<<< HEAD
                     FileName = "java",
+=======
+                    FileName = !GlobalViewModel.IsCustomJavaPath && GlobalViewModel.JavaPathFolderSettingsTxt.Length == 0
+                        ? Path.Combine(GlobalViewModel.JavaPathFolderSettingsTxt + "/bin/java.exe")
+                        : "java",
+>>>>>>> 8138598 (Fixed Java Issue and Added Custom Java Path)
                     Arguments = $"-jar \"{apktoolPath}\" -f b \"{directoryPath}\" -o \"{outputApkPath}\"",
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
@@ -113,7 +130,13 @@ namespace Phunk.Core
             {
                 ProcessStartInfo psi = new ProcessStartInfo
                 {
+<<<<<<< HEAD
                     FileName = "java",
+=======
+                    FileName = !GlobalViewModel.IsCustomJavaPath && GlobalViewModel.JavaPathFolderSettingsTxt.Length == 0
+                        ? Path.Combine(GlobalViewModel.JavaPathFolderSettingsTxt + "/bin/java.exe")
+                        : "java",
+>>>>>>> 8138598 (Fixed Java Issue and Added Custom Java Path)
                     Arguments = $"-jar \"{ubersignerPath}\" -a \"{apkPath}\" -o \"{outputApkPath}\" --allowResign" + " " + additionalParams,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
