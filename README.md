@@ -28,10 +28,11 @@ instead.
 
 
 ## Credits
-* Uber Apk Signer
-* Apktools
-* AdonisUI
-* 3301_Athlestan
+* Uber Apk Signer (Zipaligning and Signing)
+* Ookii (Folder Dialog)
+* Apktools (Building and Decompiling)
+* AdonisUI (UI Library)
+* 3301_Athlestan (<a href="https://rentry.org/How-To-Change-APK-Package-Name">APK Package Name Method</a>)
 
 ## Notice
 * Im not responsible on how you use this application. This is solely for Educational purposes as a way to broaden my knowledge regarding C# and how Processes in C# & ADB interacts.
