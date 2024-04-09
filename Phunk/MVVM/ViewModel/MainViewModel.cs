@@ -184,7 +184,7 @@ namespace Phunk.MVVM.ViewModel
             });
             
 
-            PhunkLog("Succesfully cleaned up!");
+            PhunkLog("Ready to go!");
             PhunkLog("Extracting APK");
         }
 
@@ -202,7 +202,6 @@ namespace Phunk.MVVM.ViewModel
             GlobalViewModel.ProgressValue = 0;
             if (GlobalViewModel.MetRequirements)
             {
-                await CleanUp();
                 string appDirectory = AppDomain.CurrentDomain.BaseDirectory;
                 string binFolderPath = Path.Combine(appDirectory, "bin");
                 if (!File.Exists(Path.Combine(binFolderPath, "apktool.jar")) && !File.Exists(Path.Combine(binFolderPath, "apktool.bat")) && !File.Exists(Path.Combine(binFolderPath, "uberapksigner.jar"))) {
@@ -218,6 +217,8 @@ namespace Phunk.MVVM.ViewModel
 
                     await Task.Delay(500);
                 }
+
+                await CleanUp();
 
                 ApkHandler handler = new ApkHandler();
 
@@ -389,26 +390,30 @@ namespace Phunk.MVVM.ViewModel
             await Task.Delay(500);
         }
 
-        private Task ReplaceNames()
+        private async Task<Task> ReplaceNames()
         {
-            string extracted_path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp/extracted");
-            string folderPath = Path.Combine(extracted_path, "smali/com/" + OriginalPackageName.Split(".")[1].Split(".")[0]);
-            string parentDirectory = Path.GetDirectoryName(folderPath);
-            string newFolderPath = Path.Combine(parentDirectory, CurrentPackageName.Split(".")[1].Split(".")[0]);
-            Util.RenameFolder(folderPath, newFolderPath);
-
-            string mainDirectory = Path.GetDirectoryName(FilePath);
-
-            // If the OBB exists in where the user selected the apk, we will do some certain process to ensure that everything will work.
-            if (Directory.Exists(Path.Combine(mainDirectory, OriginalPackageName)))
+            await Task.Run(() =>
             {
-                // Changes the OBB Folder and File Name to the Set Package Name
-                Util.RenameFolder(Path.Combine(mainDirectory, OriginalPackageName), Path.Combine(mainDirectory, CurrentPackageName));
-                Util.ReplaceKeywordInFileNames(Path.Combine(mainDirectory, CurrentPackageName), OriginalPackageName, CurrentPackageName);
-                Util.MoveFolder(Path.Combine(mainDirectory, CurrentPackageName), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp"));
-            }
+                string extracted_path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp/extracted");
+                string folderPath = Path.Combine(extracted_path, "smali/com/" + OriginalPackageName.Split(".")[1].Split(".")[0]);
+                string parentDirectory = Path.GetDirectoryName(folderPath);
+                string newFolderPath = Path.Combine(parentDirectory, CurrentPackageName.Split(".")[1].Split(".")[0]);
+                Util.RenameFolder(folderPath, newFolderPath);
 
-            Util.ReplaceTextInDirectory(Path.Combine(extracted_path, "smali"), OriginalPackageName.Replace(".", "/"), CurrentPackageName.Replace(".", "/"));
+                string mainDirectory = Path.GetDirectoryName(FilePath);
+
+                // If the OBB exists in where the user selected the apk, we will do some certain process to ensure that everything will work.
+                if (Directory.Exists(Path.Combine(mainDirectory, OriginalPackageName)))
+                {
+                    // Changes the OBB Folder and File Name to the Set Package Name
+                    Util.RenameFolder(Path.Combine(mainDirectory, OriginalPackageName), Path.Combine(mainDirectory, CurrentPackageName));
+                    Util.ReplaceKeywordInFileNames(Path.Combine(mainDirectory, CurrentPackageName), OriginalPackageName, CurrentPackageName);
+                    Util.MoveFolder(Path.Combine(mainDirectory, CurrentPackageName), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp"));
+                }
+
+                Util.ReplaceTextInDirectory(Path.Combine(extracted_path, "smali"), OriginalPackageName.Replace(".", "/"), CurrentPackageName.Replace(".", "/"));
+            });
+            
 
             GlobalViewModel.ProgressValue = 100;
 
