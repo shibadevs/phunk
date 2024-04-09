@@ -92,7 +92,7 @@ namespace Phunk.MVVM.ViewModel
                 try
                 {
                     GlobalViewModel.CanStart = false;
-                    GlobalViewModel.PhunkLogs += "\n[Phunk] ~ Starting Process";
+                    GlobalViewModel.PhunkLogs += "\n[Phunk] ~ Starting Phunker!";
                     await PerformTaskAsync();
 
                 } catch (Exception ex)
@@ -117,6 +117,7 @@ namespace Phunk.MVVM.ViewModel
 
                 if (openFileDialog.ShowDialog() == true)
                 {
+                    GlobalViewModel.PhunkLogs = "";
                     string selectedFilePath = openFileDialog.FileName;
                     ApkName = Path.GetFileName(selectedFilePath);
                     FilePath = selectedFilePath;
@@ -154,6 +155,8 @@ namespace Phunk.MVVM.ViewModel
             GlobalViewModel.DecompileAdditionalParamsSettingsTxt = "";
             GlobalViewModel.SigningZipaligningParamsSettingsTxt = "";
             GlobalViewModel.CustomPackageNameSettingsTxt = "";
+            GlobalViewModel.IsCustomJavaPath = false;
+            GlobalViewModel.JavaPathFolderSettingsTxt = "";
 
             GlobalViewModel.AutoCleanSettingsBoolean = false;
             GlobalViewModel.UseApkToolSettingsBoolean = false;
@@ -165,6 +168,24 @@ namespace Phunk.MVVM.ViewModel
             ApkName = "n/a";
             if (!Directory.Exists("bin")) Directory.CreateDirectory("bin");
             if (!Directory.Exists("temp")) Directory.CreateDirectory("temp");
+        }
+
+        /// <summary>
+        /// Before the whole process starts, there will be a clean up first
+        /// </summary>
+        private async Task CleanUp()
+        {
+            PhunkLog("Cleaning up Phunk...", "((⇀‸↼)) Cleaning up first!");
+
+            await Task.Run(() =>
+            {
+                Directory.Delete("temp", true);
+                Directory.CreateDirectory("temp");
+            });
+            
+
+            PhunkLog("Succesfully cleaned up!");
+            PhunkLog("Extracting APK");
         }
 
         /// <summary>
@@ -181,9 +202,9 @@ namespace Phunk.MVVM.ViewModel
             GlobalViewModel.ProgressValue = 0;
             if (GlobalViewModel.MetRequirements)
             {
+                await CleanUp();
                 string appDirectory = AppDomain.CurrentDomain.BaseDirectory;
                 string binFolderPath = Path.Combine(appDirectory, "bin");
-
                 if (!File.Exists(Path.Combine(binFolderPath, "apktool.jar")) && !File.Exists(Path.Combine(binFolderPath, "apktool.bat")) && !File.Exists(Path.Combine(binFolderPath, "uberapksigner.jar"))) {
                     
                     // Continue with the task
@@ -533,5 +554,12 @@ namespace Phunk.MVVM.ViewModel
             }
         }
         #endregion
+
+        void PhunkLog(string message, string statusMessage="")
+        {
+            GlobalViewModel.PhunkLogs += "\n[Phunk] ~ " + message;
+            if (statusMessage.Length > 0) GlobalViewModel.StatusText = statusMessage == "" ? message : statusMessage;
+        }
     }
+
 }

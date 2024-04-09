@@ -2,10 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-<<<<<<< HEAD
-=======
 using System.IO;
->>>>>>> 8138598 (Fixed Java Issue and Added Custom Java Path)
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -55,13 +52,13 @@ namespace Phunk.Core
             {
                 using (Process process = new Process())
                 {
-<<<<<<< HEAD
-                    process.StartInfo.FileName = command;
-=======
+                    if (GlobalViewModel.JavaPathFolderSettingsTxt.Length != 0)
+                    {
+                        GlobalViewModel.PhunkLogs += "\n[Phunk] using JAVA from " + GlobalViewModel.JavaPathFolderSettingsTxt;
+                    }
                     process.StartInfo.FileName = !GlobalViewModel.IsCustomJavaPath && GlobalViewModel.JavaPathFolderSettingsTxt.Length == 0
-                        ? Path.Combine(GlobalViewModel.JavaPathFolderSettingsTxt + "/bin/java.exe")
-                        : "java";
->>>>>>> 8138598 (Fixed Java Issue and Added Custom Java Path)
+                        ? "java"
+                        : Path.Combine(GlobalViewModel.JavaPathFolderSettingsTxt + "/bin/java.exe");
                     process.StartInfo.Arguments = "-version";
                     process.StartInfo.RedirectStandardError = true;
                     process.StartInfo.UseShellExecute = false;

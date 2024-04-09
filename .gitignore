@@ -1,9 +1,5 @@
-Phunk/bin
 .vs/
+.idea/
 Phunk/obj
 Phunk.Updater/obj
-<<<<<<< HEAD
 Phunk/bin
-=======
-Phunk/bin
->>>>>>> 8138598 (Fixed Java Issue and Added Custom Java Path)

@@ -12,8 +12,6 @@ namespace Phunk.MVVM.ViewModel
     {
         public static GlobalViewModel Instance { get; } = new GlobalViewModel();
 
-<<<<<<< HEAD
-=======
 		private bool _isCustomJavaPath;
 
 		public bool IsCustomJavaPath
@@ -26,7 +24,6 @@ namespace Phunk.MVVM.ViewModel
 		/// <summary>
 		/// Enables/Disables the Settings Window if process has started or not
 		/// </summary>
->>>>>>> 8138598 (Fixed Java Issue and Added Custom Java Path)
 		private bool _isProcessStarting;
 		public bool IsProcessStarting
 		{
@@ -100,11 +97,9 @@ namespace Phunk.MVVM.ViewModel
 		}
 
 		#region Settings
-<<<<<<< HEAD
 		/// <summary>
 		/// Main Settings
 		/// </summary>
-=======
 
 		/// <summary>
 		/// Main Settings
@@ -117,7 +112,6 @@ namespace Phunk.MVVM.ViewModel
 			set { _javaPathFolderSettingsTxt = value; OnPropertyChanged(); }
 		}
 		
->>>>>>> 8138598 (Fixed Java Issue and Added Custom Java Path)
 		private string? _finalOutputNameSettingsTxt;
 		public string? FinalOutputNameSettingsTxt
         {

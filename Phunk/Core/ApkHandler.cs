@@ -2,10 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-<<<<<<< HEAD
-=======
 using System.IO;
->>>>>>> 8138598 (Fixed Java Issue and Added Custom Java Path)
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,15 +20,10 @@ namespace Phunk.Core
             {
                 ProcessStartInfo psi = new ProcessStartInfo
                 {
-<<<<<<< HEAD
-                    FileName = "java",
-                    Arguments = $"-jar \"{apktoolPath}\" -f d \"{apkPath}\" -o \"{outputApkPath}\"" + " " + additionalParams,
-=======
                     FileName = !GlobalViewModel.IsCustomJavaPath && GlobalViewModel.JavaPathFolderSettingsTxt.Length == 0
-                        ? Path.Combine(GlobalViewModel.JavaPathFolderSettingsTxt + "/bin/java.exe")
-                        : "java",
-                Arguments = $"-jar \"{apktoolPath}\" -f d \"{apkPath}\" -o \"{outputApkPath}\"" + " " + additionalParams,
->>>>>>> 8138598 (Fixed Java Issue and Added Custom Java Path)
+                        ? "java"
+                        : Path.Combine(GlobalViewModel.JavaPathFolderSettingsTxt + "/bin/java.exe"),
+                    Arguments = $"-jar \"{apktoolPath}\" -f d \"{apkPath}\" -o \"{outputApkPath}\"" + " " + additionalParams,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     UseShellExecute = false,
@@ -45,6 +37,7 @@ namespace Phunk.Core
 
                     string output = process.StandardOutput.ReadToEnd();
                     string error = process.StandardError.ReadToEnd();
+
 
                     if (process.ExitCode == 0)
                     {
@@ -75,13 +68,9 @@ namespace Phunk.Core
             {
                 ProcessStartInfo psi = new ProcessStartInfo
                 {
-<<<<<<< HEAD
-                    FileName = "java",
-=======
                     FileName = !GlobalViewModel.IsCustomJavaPath && GlobalViewModel.JavaPathFolderSettingsTxt.Length == 0
-                        ? Path.Combine(GlobalViewModel.JavaPathFolderSettingsTxt + "/bin/java.exe")
-                        : "java",
->>>>>>> 8138598 (Fixed Java Issue and Added Custom Java Path)
+                        ? "java"
+                        : Path.Combine(GlobalViewModel.JavaPathFolderSettingsTxt + "/bin/java.exe"),
                     Arguments = $"-jar \"{apktoolPath}\" -f b \"{directoryPath}\" -o \"{outputApkPath}\"",
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
@@ -93,6 +82,7 @@ namespace Phunk.Core
                 {
                     process.Start();
                     process.WaitForExit();
+                   
 
                     string output = process.StandardOutput.ReadToEnd();
                     string error = process.StandardError.ReadToEnd();
@@ -130,45 +120,41 @@ namespace Phunk.Core
             {
                 ProcessStartInfo psi = new ProcessStartInfo
                 {
-<<<<<<< HEAD
-                    FileName = "java",
-=======
                     FileName = !GlobalViewModel.IsCustomJavaPath && GlobalViewModel.JavaPathFolderSettingsTxt.Length == 0
-                        ? Path.Combine(GlobalViewModel.JavaPathFolderSettingsTxt + "/bin/java.exe")
-                        : "java",
->>>>>>> 8138598 (Fixed Java Issue and Added Custom Java Path)
+                        ? "java"
+                        : Path.Combine(GlobalViewModel.JavaPathFolderSettingsTxt + "/bin/java.exe"),
                     Arguments = $"-jar \"{ubersignerPath}\" -a \"{apkPath}\" -o \"{outputApkPath}\" --allowResign" + " " + additionalParams,
-                    RedirectStandardOutput = true,
-                    RedirectStandardError = true,
-                    UseShellExecute = false,
-                    CreateNoWindow = true
-                };
+                        RedirectStandardOutput = true,
+                        RedirectStandardError = true,
+                        UseShellExecute = false,
+                        CreateNoWindow = true
+                    };
 
-                using (Process process = new Process { StartInfo = psi })
-                {
-                    process.Start();
-                    process.WaitForExit();
-
-                    string output = process.StandardOutput.ReadToEnd();
-                    string error = process.StandardError.ReadToEnd();
-
-                    if (process.ExitCode == 0)
+                    using (Process process = new Process { StartInfo = psi })
                     {
-                        GlobalViewModel.StatusText = "(人´∀`) Signing and Zipaligning Success!";
-                        GlobalViewModel.PhunkLogs += "\n[Phunk] ~ Signing and Zipaligning Success!";
+                        process.Start();
+                        process.WaitForExit();
 
-                        //Console.WriteLine("Output: " + output);
-                    }
-                    else
-                    {
-                        GlobalViewModel.StatusText = "（◞‸◟） Signing and Zipaligning Failed!";
-                        GlobalViewModel.PhunkLogs += "\n[Phunk] ! Signing and Zipaligning Failed";
-                        GlobalViewModel.PhunkLogs += "\n[Phunk] ! " + error;
+                        string output = process.StandardOutput.ReadToEnd();
+                        string error = process.StandardError.ReadToEnd();
 
-                        //Console.WriteLine("Apktool build failed.");
-                        MessageBox.Show(error);
+                        if (process.ExitCode == 0)
+                        {
+                            GlobalViewModel.StatusText = "(人´∀`) Signing and Zipaligning Success!";
+                            GlobalViewModel.PhunkLogs += "\n[Phunk] ~ Signing and Zipaligning Success!";
+
+                            //Console.WriteLine("Output: " + output);
+                        }
+                        else
+                        {
+                            GlobalViewModel.StatusText = "（◞‸◟） Signing and Zipaligning Failed!";
+                            GlobalViewModel.PhunkLogs += "\n[Phunk] ! Signing and Zipaligning Failed";
+                            GlobalViewModel.PhunkLogs += "\n[Phunk] ! " + error;
+
+                            //Console.WriteLine("Apktool build failed.");
+                            MessageBox.Show(error);
+                        }
                     }
-                }
             }
             catch (Exception ex)
             {

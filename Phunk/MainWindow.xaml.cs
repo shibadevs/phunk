@@ -24,5 +24,17 @@ namespace Phunk
         {
             InitializeComponent();
         }
+
+        // Fix for Phunk not closing when process has started
+        private void AdonisWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Environment.Exit(Environment.ExitCode);
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            PhunkLogTxt.SelectionStart = PhunkLogTxt.Text.Length;
+            PhunkLogTxt.ScrollToEnd();
+        }
     }
 }

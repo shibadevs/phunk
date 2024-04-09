@@ -12,7 +12,7 @@
         mc:Ignorable="d"
         Background="#2a2b34"
         WindowStartupLocation="CenterScreen"
-        Title="Phunk" Height="450" Width="800" TitleBarBackground="#25262e">
+        Title="Phunk" Height="450" Width="800" TitleBarBackground="#25262e" Closing="AdonisWindow_Closing">
     <Window.Style>
         <Style TargetType="Window" BasedOn="{StaticResource {x:Type Window}}"/>
     </Window.Style>
@@ -24,12 +24,12 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        
+
         <Grid Margin="6 5 0 0">
             <StackPanel Width="150">
                 <Button Content="Clear Logs" Cursor="Hand" Margin="5" Command="{Binding ClearLogsCommand}"/>
@@ -45,7 +45,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                
+
                 <Border Height="{Binding Path=TitleBarActualHeight, RelativeSource={RelativeSource AncestorType={x:Type adonisControls:AdonisWindow}}}"/>
                 <GroupBox Header="Phunker" Margin="10 10 10 0">
                     <Grid Margin="5 0 5 5">
@@ -55,11 +55,15 @@
                         </Grid.RowDefinitions>
 
                         <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="177*"/>
+                                <ColumnDefinition Width="122*"/>
+                            </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <StackPanel>
+                            <StackPanel Grid.ColumnSpan="2">
                                 <TextBlock>
                                     <TextBlock.Text>
                                         <MultiBinding StringFormat="Filename: {0}">
@@ -106,8 +110,8 @@
                                 </RichTextBox.Resources>
                             </RichTextBox>-->
 
-                            <TextBox Grid.Row="1" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" VerticalContentAlignment="Top" Margin="0 5 0 0"
-                                     VerticalScrollBarVisibility="Visible" adonisExtensions:CursorSpotlightExtension.BackgroundBrush="Transparent" Background="#25262e" Text="{Binding GlobalViewModel.PhunkLogs}"/>
+                            <TextBox x:Name="PhunkLogTxt" Grid.Row="1" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" VerticalContentAlignment="Top" Margin="0 5 0 0"
+                                     VerticalScrollBarVisibility="Visible" adonisExtensions:CursorSpotlightExtension.BackgroundBrush="Transparent" Background="#25262e" Text="{Binding GlobalViewModel.PhunkLogs}" Grid.ColumnSpan="2" TextChanged="TextBox_TextChanged"/>
                         </Grid>
 
                         <Grid Grid.Row="1">
@@ -123,7 +127,7 @@
 
                 <Button Content="Start" IsEnabled="{Binding GlobalViewModel.CanStart}" Cursor="Hand" Command="{Binding StartCommand}" Grid.Row="1" Margin="5" Width="620" Height="40" HorizontalAlignment="Center"
                         Style="{DynamicResource {x:Static adonisUi:Styles.AccentButton}}"/>
-                
+
             </Grid>
         </Grid>
         <StackPanel Grid.Row="1" Grid.ColumnSpan="2">

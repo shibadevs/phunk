@@ -10,11 +10,8 @@
         xmlns:converter="clr-namespace:Phunk.Converter"
         xmlns:vm="clr-namespace:Phunk.MVVM.ViewModel"
         mc:Ignorable="d"
-<<<<<<< HEAD
-        Title="Phunk | Settings" Height="330" Width="350" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterScreen">
-=======
-        Title="Phunk | Settings" Height="375" Width="350" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterScreen">
->>>>>>> 8138598 (Fixed Java Issue and Added Custom Java Path)
+        Title="Phunk | Settings" Height="350" Width="350" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterScreen">
+
     <Window.DataContext>
         <vm:SettingsViewModel/>
     </Window.DataContext>
@@ -28,10 +25,8 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-<<<<<<< HEAD
-=======
+
             <RowDefinition Height="auto"/>
->>>>>>> 8138598 (Fixed Java Issue and Added Custom Java Path)
         </Grid.RowDefinitions>
 
         <StackPanel Margin="5">
@@ -53,11 +48,8 @@
             <TextBlock Text="Uber Apk Signer Additional Params" Margin="0 0 2 2"/>
             <TextBox Text="{Binding GlobalViewModel.SigningZipaligningParamsSettingsTxt, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding GlobalViewModel.IsProcessStarting, Converter={StaticResource BooleanNegationConverter}}" adonisExtensions:CursorSpotlightExtension.BackgroundBrush="Transparent" Background="#25262e" Foreground="White" adonisExtensions:WatermarkExtension.IsWatermarkVisible="True" adonisExtensions:WatermarkExtension.Watermark="Phunk Additional Params"/>
         </StackPanel>
-<<<<<<< HEAD
 
-        <Grid Margin="5" Grid.Row="4">
-=======
-        
+        <Grid Grid.Row="4">
         <StackPanel Margin="5" Grid.Row="4">
             <TextBlock Text="Custom Java Path" Margin="0 0 2 2"/>
             <Grid>
@@ -74,8 +66,10 @@
             </Grid>
         </StackPanel>
 
+        
+        </Grid>
+
         <Grid Margin="5" Grid.Row="5">
->>>>>>> 8138598 (Fixed Java Issue and Added Custom Java Path)
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
@@ -84,24 +78,14 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2">
-                <TextBlock Text="Configs" Margin="0 0 2 2"/>
-                <TextBlock FontStyle="Italic" Text="(features are not yet available)" Margin="0 0 2 2"/>
+            <StackPanel Orientation="Vertical" Grid.ColumnSpan="2">
+                <TextBlock Text="Phunk Configs" Margin="0 0 2 2"/>
+                <TextBlock FontStyle="Italic" Text="(Features are yet to be implemented)" Margin="5 0 2 2"/>
             </StackPanel>
 
-            <StackPanel Margin="0 4 0 0" Grid.Row="1" IsEnabled="{Binding GlobalViewModel.IsProcessStarting, Converter={StaticResource BooleanNegationConverter}}">
-                <CheckBox Content="Auto Clean" ToolTip="Cleans up the temp folder before process starts"/>
+            <!--<StackPanel Margin="0 0 10 0" Grid.Row="1" IsEnabled="{Binding GlobalViewModel.IsProcessStarting, Converter={StaticResource BooleanNegationConverter}}">
                 <CheckBox Content="Use Apktool CLI" Margin="0 4 0 0" ToolTip="If you have apktool installed already, you can ask Phunk to use the cli instead"/>
-            </StackPanel>
-
-            <StackPanel Grid.Row="1" Margin="8 0 0 0" Grid.Column="1" IsEnabled="{Binding GlobalViewModel.IsProcessStarting, Converter={StaticResource BooleanNegationConverter}}">
-                <CheckBox Content="Auto Update Phunk" Margin="0 4 0 0" ToolTip="Auto updates Phunk"/>
-            </StackPanel>
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 8138598 (Fixed Java Issue and Added Custom Java Path)
+            </StackPanel>-->
         </Grid>
     </Grid>
 </adonisControls:AdonisWindow>
