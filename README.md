@@ -8,7 +8,6 @@ NOTE: Please see requirements below for this application to work.
 3. Click Select Apk and navigate to your desired APK and select it
 4. Click Start and wait for it to finish. Check at the bottom part, wait until it says success or until it opens the folder.
 5. in the opened folder, select your APK and your OBB if you have one, drag and drop to Rookie Sideloader and you should be good to go.
-6. NOTE: don't forget to delete the files inside the temp folder when finished. (_not neccesarily needed as Phunk overwrites anything inside the temp, but its good to clean it once in a while._)
 
 ## Settings Guide
 - Output Name: default is _apkname.apk_ where _apkname_ is the original name of the APK.
